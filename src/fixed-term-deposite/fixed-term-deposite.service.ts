@@ -1,9 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { CreateFixedTermDepositeDto } from './dto/create-fixed-term-deposite.dto';
 import { UpdateFixedTermDepositeDto } from './dto/update-fixed-term-deposite.dto';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class FixedTermDepositeService {
+export class FixedTermDepositeService
+  extends PrismaClient
+  implements OnModuleInit
+{
+  async onModuleInit() {
+    await this.$connect();
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   create(createFixedTermDepositeDto: CreateFixedTermDepositeDto) {
     return 'This action adds a new fixedTermDeposite';
   }
@@ -16,6 +24,7 @@ export class FixedTermDepositeService {
     return `This action returns a #${id} fixedTermDeposite`;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(id: number, updateFixedTermDepositeDto: UpdateFixedTermDepositeDto) {
     return `This action updates a #${id} fixedTermDeposite`;
   }
