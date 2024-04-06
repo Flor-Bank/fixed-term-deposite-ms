@@ -12,3 +12,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum fixedTermDepositeStatus {
+  ACTIVE
+  MATURED
+  CLOSED
+}
+
+model FixedTermDeposite {
+  id String @id @default(uuid())
+  Amount Float
+  InterestRate Float
+
+  TermStartDate DateTime @default(now())
+  TermEndDate DateTime
+
+  status fixedTermDepositeStatus
+
+  updateAt DateTime @updatedAt
+}
