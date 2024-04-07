@@ -6,7 +6,9 @@ import { UpdateFixedTermDepositeDto } from './dto/update-fixed-term-deposite.dto
 
 @Controller()
 export class FixedTermDepositeController {
-  constructor(private readonly fixedTermDepositeService: FixedTermDepositeService) {}
+  constructor(
+    private readonly fixedTermDepositeService: FixedTermDepositeService,
+  ) {}
 
   @MessagePattern('createFixedTermDeposite')
   create(@Payload() createFixedTermDepositeDto: CreateFixedTermDepositeDto) {
@@ -25,7 +27,10 @@ export class FixedTermDepositeController {
 
   @MessagePattern('updateFixedTermDeposite')
   update(@Payload() updateFixedTermDepositeDto: UpdateFixedTermDepositeDto) {
-    return this.fixedTermDepositeService.update(updateFixedTermDepositeDto.id, updateFixedTermDepositeDto);
+    return this.fixedTermDepositeService.update(
+      updateFixedTermDepositeDto.id,
+      updateFixedTermDepositeDto,
+    );
   }
 
   @MessagePattern('removeFixedTermDeposite')
