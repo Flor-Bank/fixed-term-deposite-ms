@@ -24,17 +24,13 @@ model FixedTermDeposite {
 
   amount_to_invest Float
   status           fixedTermDepositeStatus
-  InterestRate     Float
-
-  creation_date DateTime @default(now())
   maturity_date DateTime
-
-  interest_amount     Float
-  interest_porcentaje Float
+  interest_rate     Float
+  interest_rate_amount     Float
 
   total_amount Float
 
-
+  creation_date DateTime @default(now())
   updateAt            DateTime @updatedAt
 }
 

@@ -14,9 +14,7 @@ export class CreateFixedTermDepositeDto {
     message: `Allowed status values: ${FixedTermDepositeStatusList}`,
   })
   status: fixedTermDepositeStatus;
-  @IsDateString()
-  @Type(() => Date)
-  creation_date: Date;
+
   @IsDateString()
   @Type(() => Date)
   maturity_date: Date;
@@ -25,17 +23,21 @@ export class CreateFixedTermDepositeDto {
   })
   @IsPositive()
   @Type(() => Number)
-  interest_amount: number;
+  interest_rate: number;
   @IsNumber({
     maxDecimalPlaces: 2,
   })
   @IsPositive()
   @Type(() => Number)
-  interest_porcentaje: number;
+  interest_rate_amount: number;
+
   @IsNumber({
     maxDecimalPlaces: 2,
   })
   @IsPositive()
   @Type(() => Number)
   total_amount: number;
+  @IsDateString()
+  @Type(() => Date)
+  creation_date: Date;
 }
