@@ -9,7 +9,7 @@ export class FixedTermDepositeController {
     private readonly fixedTermDepositeService: FixedTermDepositeService,
   ) {}
 
-  @MessagePattern('createFixedTermDeposite')
+  @MessagePattern('fixedTermDeposite.create')
   create(@Payload() createFixedTermDepositeDto: CreateFixedTermDepositeDto) {
     return this.fixedTermDepositeService.create(createFixedTermDepositeDto);
   }
