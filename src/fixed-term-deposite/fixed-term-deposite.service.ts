@@ -13,7 +13,9 @@ export class FixedTermDepositeService
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   create(createFixedTermDepositeDto: CreateFixedTermDepositeDto) {
-    return 'This action adds a new fixedTermDeposite';
+    return this.fixedTermDeposite.create({
+      data: createFixedTermDepositeDto,
+    });
   }
 
   findAll() {
