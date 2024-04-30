@@ -3,6 +3,7 @@ import { CreateFixedTermDepositeDto } from './dto/create-fixed-term-deposite.dto
 
 import { PrismaClient } from '@prisma/client';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class FixedTermDepositeService
@@ -38,8 +39,24 @@ export class FixedTermDepositeService
     };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} fixedTermDeposite`;
+  async findOne(id: number) {
+    try {
+      const fixedTermDeposite = await this.fixedTermDeposite.findFirst({
+        where: { id },
+      });
+      if (!fixedTermDeposite) {
+        throw new RpcException({
+          status: 404,
+          message: `fixed term deposite with id ${id} not found`,
+        });
+      }
+      return fixedTermDeposite;
+    } catch (error) {
+      throw new RpcException({
+        status: 400,
+        message: error.message,
+      });
+    }
   }
 
   remove(id: number) {
