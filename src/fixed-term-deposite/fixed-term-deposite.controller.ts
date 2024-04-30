@@ -1,7 +1,8 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Query } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { FixedTermDepositeService } from './fixed-term-deposite.service';
 import { CreateFixedTermDepositeDto } from './dto/create-fixed-term-deposite.dto';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Controller()
 export class FixedTermDepositeController {
@@ -14,9 +15,9 @@ export class FixedTermDepositeController {
     return this.fixedTermDepositeService.create(createFixedTermDepositeDto);
   }
 
-  @MessagePattern('findAllFixedTermDeposite')
-  findAll() {
-    return this.fixedTermDepositeService.findAll();
+  @MessagePattern('fixedTermDeposite.findAll')
+  findAll(@Query() paginationDto: PaginationDto) {
+    return this.fixedTermDepositeService.findAll(paginationDto);
   }
 
   @MessagePattern('findOneFixedTermDeposite')

@@ -2,6 +2,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { CreateFixedTermDepositeDto } from './dto/create-fixed-term-deposite.dto';
 
 import { PrismaClient } from '@prisma/client';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class FixedTermDepositeService
@@ -18,8 +19,23 @@ export class FixedTermDepositeService
     });
   }
 
-  findAll() {
-    return `This action returns all fixedTermDeposite`;
+  async findAll(paginationDto: PaginationDto) {
+    const { page, limit } = paginationDto;
+
+    const totalItems = await this.fixedTermDeposite.count();
+    const lastPage = Math.ceil(totalItems / limit);
+
+    return {
+      data: await this.fixedTermDeposite.findMany({
+        skip: (page - 1) * limit,
+        take: limit,
+      }),
+      meta: {
+        totalItems: totalItems,
+        page: page,
+        lastPage: lastPage,
+      },
+    };
   }
 
   findOne(id: number) {
