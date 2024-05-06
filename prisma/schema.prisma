@@ -22,15 +22,17 @@ enum fixedTermDepositeStatus {
 model FixedTermDeposite {
   id Int @id @default(autoincrement())
 
-  amount_to_invest Float
-  status           fixedTermDepositeStatus
-  maturity_date DateTime
-  interest_rate     Float
-  interest_rate_amount     Float
+  amount_to_invest     Float
+  status               fixedTermDepositeStatus
+  maturity_date        DateTime
+  interest_rate        Float
+  interest_rate_amount Float
 
   total_amount Float
 
-  creation_date DateTime @default(now())
-  updateAt            DateTime @updatedAt
-}
+  //owner Id
+  ownerId String
 
+  creation_date DateTime @default(now())
+  updateAt      DateTime @updatedAt
+}
