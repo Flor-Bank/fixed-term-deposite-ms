@@ -1,5 +1,11 @@
 import { fixedTermDepositeStatus } from '@prisma/client';
-import { IsDateString, IsEnum, IsNumber, IsPositive } from 'class-validator';
+import {
+  IsDateString,
+  IsEnum,
+  IsNumber,
+  IsPositive,
+  IsString,
+} from 'class-validator';
 import { FixedTermDepositeStatusList } from '../enum/fixed-term-deposite.enum';
 import { Type } from 'class-transformer';
 
@@ -37,6 +43,11 @@ export class CreateFixedTermDepositeDto {
   @IsPositive()
   @Type(() => Number)
   total_amount: number;
+
+  //owner relationship
+  @IsString()
+  owner_id: string;
+
   @IsDateString()
   @Type(() => Date)
   creation_date: Date;
