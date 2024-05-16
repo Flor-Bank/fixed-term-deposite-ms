@@ -31,7 +31,7 @@ model FixedTermDeposite {
   total_amount Float
 
   //owner Id
-  ownerId String
+  owner_id String
 
   creation_date DateTime @default(now())
   updateAt      DateTime @updatedAt
