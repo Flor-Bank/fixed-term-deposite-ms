@@ -1,15 +1,19 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { CreateFixedTermDepositeDto } from './dto/create-fixed-term-deposite.dto';
 
 import { PrismaClient } from '@prisma/client';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
-import { RpcException } from '@nestjs/microservices';
+import { ClientProxy, RpcException } from '@nestjs/microservices';
+import { NATS_CLIENT } from 'src/config';
 
 @Injectable()
 export class FixedTermDepositeService
   extends PrismaClient
   implements OnModuleInit
 {
+  constructor(@Inject(NATS_CLIENT) private readonly client: ClientProxy) {
+    super();
+  }
   async onModuleInit() {
     await this.$connect();
   }
